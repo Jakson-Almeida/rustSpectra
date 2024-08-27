@@ -39,23 +39,19 @@ pub fn App<G: Html>(cx: Scope) -> View<G> {
 
     view! { cx,
         main(class="container") {
+            h1() { "Rust Spectra Reader" }
             div(class="row") {
-                a(href="https://tauri.app",target="_blank") {
-                    img(src="public/tauri.svg",class="logo tauri",alt="Tauri logo")
-                }
-                a(href="https://sycamore-rs.netlify.app",target="_blank") {
-                    img(src="public/sycamore.svg",class="logo sycamore",alt="Sycamore logo")
-                }
+                i(class="fa fa-file-code-o", style="font-size:200px;")
             }
 
             p {
-                "Click on the Tauri and Sycamore logos to learn more."
+                "Locate the Spectro file or copy and paste above."
             }
 
             form(class="row",on:submit=greet) {
-                input(id="greet-input",bind:value=name,placeholder="Enter a name...")
+                input(id="greet-input",bind:value=name,placeholder="Select one text file...")
                 button(type="submit") {
-                    "Greet"
+                    "Search"
                 }
             }
             p {
