@@ -38,11 +38,25 @@ pub fn App<G: Html>(cx: Scope) -> View<G> {
         })
     };
 
+    let drag_msg = create_signal(cx, String::new());
+
+    let drag = move |e: Event| {
+        e.prevent_default();
+        spawn_local_scoped(cx, async move {
+            let new_msg =
+                invoke("drag_file", JsValue::NULL).await;
+
+            log(&new_msg.as_string().unwrap());
+
+            drag_msg.set(new_msg.as_string().unwrap());
+        })
+    };
+
     view! { cx,
         main(class="container") {
             h1() { "Rust Spectra Reader" }
             div(class="row") {
-                div(class="icon file", on:click=greet) {
+                div(class="icon file", on:click=greet, on:paste=drag, on:dragover=drag, on:drop=drag) {
                     i(class="fa fa-file-code-o", style="font-size:200px; padding-bottom: 20px;")
                 }
             }
@@ -55,6 +69,11 @@ pub fn App<G: Html>(cx: Scope) -> View<G> {
                 input(id="greet-input",bind:value=name,placeholder=greet_msg.get()) {}
                 button(type="submit") {
                     "Search"
+                }
+            }
+            p {
+                b {
+                    (drag_msg.get())
                 }
             }
             p {
