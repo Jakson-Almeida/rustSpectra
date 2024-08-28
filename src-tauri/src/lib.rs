@@ -153,11 +153,17 @@ fn return_file(name: &str) -> String {
     format!("File: {}", file)
 }
 
+#[tauri::command]
+fn drag_file() -> String {
+    println!("Drag event");
+    format!("Drag event")
+}
+
 #[cfg_attr(mobile, tauri::mobile_entry_point)]
 pub fn run() {
     tauri::Builder::default()
         .plugin(tauri_plugin_shell::init())
-        .invoke_handler(tauri::generate_handler![greet, return_file])
+        .invoke_handler(tauri::generate_handler![greet, return_file, drag_file])
         .run(tauri::generate_context!())
         .expect("error while running tauri application");
 }
