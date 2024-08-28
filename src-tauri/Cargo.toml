@@ -19,4 +19,8 @@ tauri = { version = "2.0.0-rc", features = [] }
 tauri-plugin-shell = "2.0.0-rc"
 serde = { version = "1", features = ["derive"] }
 serde_json = "1"
+rfd = "0.14.1"
+ndarray = "0.16.1"
+csv = "1.2.1"
+
 

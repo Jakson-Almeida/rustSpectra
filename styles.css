@@ -37,6 +37,23 @@
   filter: drop-shadow(0 0 2em #24c8db);
 }
 
+.icon {
+  will-change: filter;
+  transition: 0.75s;
+}
+
+.icon.file:hover {
+  filter: drop-shadow(0 0 2em #02faee);
+}
+
+.text-white {
+  color: white;
+}
+
+.text-white.black:hover {
+  color: black;
+}
+
 .row {
   display: flex;
   justify-content: center;

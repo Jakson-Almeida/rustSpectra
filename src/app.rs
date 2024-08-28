@@ -23,6 +23,7 @@ struct GreetArgs<'a> {
 pub fn App<G: Html>(cx: Scope) -> View<G> {
     let name = create_signal(cx, String::new());
     let greet_msg = create_signal(cx, String::new());
+    greet_msg.set("Select one text file...".to_string());
 
     let greet = move |e: Event| {
         e.prevent_default();
@@ -41,7 +42,9 @@ pub fn App<G: Html>(cx: Scope) -> View<G> {
         main(class="container") {
             h1() { "Rust Spectra Reader" }
             div(class="row") {
-                i(class="fa fa-file-code-o", style="font-size:200px;")
+                div(class="icon file", on:click=greet) {
+                    i(class="fa fa-file-code-o", style="font-size:200px; padding-bottom: 20px;")
+                }
             }
 
             p {
@@ -49,7 +52,7 @@ pub fn App<G: Html>(cx: Scope) -> View<G> {
             }
 
             form(class="row",on:submit=greet) {
-                input(id="greet-input",bind:value=name,placeholder="Select one text file...")
+                input(id="greet-input",bind:value=name,placeholder=greet_msg.get()) {}
                 button(type="submit") {
                     "Search"
                 }
