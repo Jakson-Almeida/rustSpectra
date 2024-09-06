@@ -5,6 +5,11 @@ use std::fs::File;
 use csv::ReaderBuilder;
 use std::io::BufReader;
 use ndarray::Array1;
+use std::fs;
+use std::path::Path;
+
+mod svg_utils;
+pub mod spectrum;
 
 // CSV files
 
@@ -117,6 +122,21 @@ pub fn show_strat(file_path: &str) {
         }
     }
 }
+
+////////////////////////////////////////////////////////////////////////////////////
+
+// fn import_TXT_Spectrum(file_path: &str) -> Result<Spectrum, Box<dyn Error>> {
+//     // Converte o caminho do arquivo para um objeto Path
+//     let path = Path::new(file_path);
+    
+//     // Lê o conteúdo do arquivo TXT para uma string
+//     let txt_content = fs::read_to_string(path)?;
+    
+//     // Cria um objeto Spectrum a partir do texto do TXT
+//     let spectrum = Spectrum::from_csv_text(&txt_content)?;
+    
+//     Ok(spectrum)
+// }
 
 ////////////////////////////////////////////////////////////////////////////////////
 
